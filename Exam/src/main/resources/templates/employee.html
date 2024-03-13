@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Management System</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <style>
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .modal-body {
+            padding: 20px;
+        }
+
+        .modal-footer {
+            justify-content: flex-start;
+        }
+
+        .table thead th {
+            background-color: #007bff;
+            color: #ffffff;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+            border-color: #545b62;
+        }
+
+        .btn-info {
+            background-color: #17a2b8;
+            border-color: #17a2b8;
+        }
+
+        .btn-info:hover {
+            background-color: #117a8b;
+            border-color: #10707f;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+
+        .btn-danger:hover {
+            background-color: #bd2130;
+            border-color: #b21f2d;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1 class="mt-5">Employee Management System</h1>
+    <hr>
+
+    <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#employeeModal">
+        Add Employee
+    </button>
+
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Salary</th>
+        </tr>
+        </thead>
+        <tbody id="employeeTableBody">
+        <script>
+            function addEmployeeToTable(name, age, salary) {
+                var tbody = document.getElementById('employeeTableBody');
+                var newRow = document.createElement('tr');
+                newRow.innerHTML = `
+            <td>${name}</td>
+            <td>${age}</td>
+            <td>${salary}</td>
+        `;
+                tbody.appendChild(newRow);
+            }
+
+            var employees = [
+                { name: "John Doe", age: 30, salary: "$5000" },
+                { name: "Jane Smith", age: 25, salary: "$6000" },
+                { name: "Michael Johnson", age: 35, salary: "$5500" }
+            ];
+
+            employees.forEach(employee => {
+                addEmployeeToTable(employee.name, employee.age, employee.salary);
+            });
+        </script>
+        </tbody>
+    </table>
+
+    <div class="modal fade" id="employeeModal" tabindex="-1" aria-labelledby="employeeModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="employeeModalLabel">Employee Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="employeeForm">
+                        <div class="form-group">
+                            <label for="employeeName">Name</label>
+                            <input type="text" class="form-control" id="employeeName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="employeeAge">Age</label>
+                            <input type="number" class="form-control" id="employeeAge" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="employeeSalary">Salary</label>
+                            <input type="text" class="form-control" id="employeeSalary" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" onclick="saveEmployee()">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    function addEmployeeToTable(name, age, salary) {
+        var tbody = document.getElementById('employeeTableBody');
+        var newRow = document.createElement('tr');
+        newRow.innerHTML = `
+            <td>${name}</td>
+            <td>${age}</td>
+            <td>${salary}</td>
+        `;
+        tbody.appendChild(newRow);
+    }
+
+    var employees = [
+        { name: "John Doe", age: 30, salary: "$5000" },
+        { name: "Jane Smith", age: 25, salary: "$6000" },
+        { name: "Michael Johnson", age: 35, salary: "$5500" }
+    ];
+
+    employees.forEach(employee => {
+        addEmployeeToTable(employee.name, employee.age, employee.salary);
+    });
+
+    function saveEmployee() {
+        var name = document.getElementById('employeeName').value;
+        var age = document.getElementById('employeeAge').value;
+        var salary = document.getElementById('employeeSalary').value;
+        addEmployeeToTable(name, age, salary);
+        $('#employeeModal').modal('hide');
+    }
+</script>
+
+</body>
+</html>
